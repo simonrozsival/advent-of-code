@@ -11,13 +11,25 @@ def unescaped_length(line):
 		length += 1
 		if c == "\\": 
 			d = line[i+1]
-			if d == '"' or d == "\\":
+			if d == '"':
+				skip = 1
+			elif d == "\\":
 				skip = 1
 			elif d == "x":
-				try:
-					twoDigits = int(line[i+2:i+4])
-					skip = 3
-				except:				
-					pass
-	print("'{}' ({})".format(line, length))
+				skip = 3
+	# print("'{}' ({})".format(line, length))
 	return length
+	
+def encode(line):
+	output = ""
+	for char in line:
+		if char == '\"':
+			output += '\\\"'
+		elif char == '\\':
+			output += '\\\\'
+		else:
+			output += char
+	output = '\"{}\"'.format(output)
+	print("{} -> {}".format(line, output))
+	return output
+		
