@@ -5,16 +5,15 @@ if len(sys.argv) < ARGS_COUNT:
 	print("Missing arguments")
 	sys.exit(1)
 
-data = sys.argv[1]
-print("input argument: {}".format(data))
+from task import sumNumbersWithoutRed
 
 ##
 
 result = 0
 
 with open("in.txt") as file:
-	for line in file:
-		pass
+	data = file.read()
+	result = sumNumbersWithoutRed(data)
 
 
 ##
