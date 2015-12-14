@@ -11,8 +11,11 @@ class Tester:
 			self.passedTests += 1
 		else:
 			self.failedTests += 1
-	def report(self):		
-		print("-----")
-		(color, resultMsg) = (self.GREEN, "OK") if self.failedTests == 0 else (self.RED, "TESTING FAILED")
-		print("{}{}\033[1;m: {} of {} tests failed".format(color, resultMsg, self.failedTests, self.passedTests + self.failedTests))
+	def succcessReport(self):
+		return (self.GREEN, "OK", "all {} tests passed".format(self.passedTests))
+	def failReport(self):
+		return (self.RED, "TESTING FAILED", "{} of {} tests failed".format(self.failedTests, self.passedTests + self.failedTests))
+	def report(self):
+		(color, status, reportMsg) = self.succcessReport() if self.failedTests == 0 else self.failReport()
+		print("{}{}\033[1;m: {}".format(color, status, reportMsg))
 		return self.failedTests == 0
